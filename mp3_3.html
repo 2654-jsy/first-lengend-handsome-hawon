@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎧 ALBUM PLAYER | MY PLAYLIST</title>
+    <style>
+        /* 1. 기본 스타일 및 변수 설정 */
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --point-color: #1db954; /* 스포티파이 그린 */
+            --text-main: #ffffff;
+            --text-sub: #b3b3b3;
+            --transition: all 0.3s ease;
+        }
+
+        body { 
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; 
+            margin: 0; 
+            background-color: var(--bg-color); 
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 2. 헤더 및 네비게이션 */
+        header { 
+            background: linear-gradient(180deg, #282828 0%, var(--bg-color) 100%);
+            padding: 3rem 1rem; 
+            text-align: center; 
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 2.5rem; 
+            letter-spacing: -1px;
+        }
+
+        nav { 
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem; 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px; 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        nav span { 
+            cursor: pointer; 
+            font-weight: 600; 
+            color: var(--text-sub);
+            transition: var(--transition);
+        }
+
+        nav span:hover { color: var(--point-color); }
+
+        /* 3. 메인 컨텐츠 (앨범 카드 레이아웃) */
+        main { 
+            padding: 40px 20px; 
+            max-width: 850px; 
+            margin: auto; 
+        }
+
+        .album-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album-card:hover {
+            transform: translateY(-5px);
+            border-color: #444;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* 캐릭터 이미지 포인트 */
+        .char-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 50px;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+        }
+
+        /* 앨범 아트 */
+        .art-wrapper {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+
+        .art-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .art-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 앨범 정보 */
+        .album-info { flex-grow: 1; }
+
+        .album-info h2 { 
+            margin: 0 0 5px 0; 
+            font-size: 1.6rem;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .artist-name { 
+            font-size: 0.9rem; 
+            color: var(--point-color); 
+            font-weight: normal; 
+        }
+
+        .track-count { color: var(--text-sub); font-size: 0.85rem; margin-bottom: 15px; }
+
+        .rec-title { font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; color: #eee; }
+
+        ol { 
+            margin: 0; 
+            padding-left: 18px; 
+            font-size: 0.9rem; 
+            color: var(--text-sub); 
+        }
+
+        /* 오디오 커스텀 */
+        audio {
+            width: 100%;
+            margin-top: 20px;
+            height: 35px;
+            filter: invert(1) hue-rotate(100deg) brightness(1.2); /* 다크모드에 어울리는 색상 */
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 40px; 
+            font-size: 0.8rem; 
+            color: #555; 
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 600px) {
+            .album-card { flex-direction: column; text-align: center; }
+            .art-wrapper { width: 200px; height: 200px; }
+            ol { list-style-position: inside; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>앨범 플레이리스트🎶</h1>
+</header>
+
+<nav>
+    <span>홈</span>
+    <span>소개</span>
+    <span>블로그</span>
+</nav>
+
+<main>
+    <article class="album-card">
+        <img src="https://i.namu.wiki/i/2VJiw86Ztjwn6Jr8kO8cFfxBGZPdIZOqCfdvOsVKVxxmEF2SMdw02i2rx21bn7HjvMOR5FV5PYumJDDqgAEWQQ.webp" class="char-tag" alt="검볼">
+        <div class="art-wrapper">
+            <a href="https://youtu.be/MDEok6_kx6U?si=L9JZbqQiznPNWmYN" target="_blank">
+                <img src="https://image.bugsm.co.kr/album/images/500/41163/4116386.jpg" alt="K-FLIP+">
+            </a>
+        </div>
+        <div class="album-info">
+            <h2>K-FLIP+ <span class="artist-name">Sik-k, Lilmoshipit</span></h2>
+            <div class="track-count">트랙 수 : 10</div>
+            <div class="rec-title">추천 트랙:</div>
+            <ol>
+                <li>LOV3 (feat. Bryan Chase, Okasian)</li>
+                <li>PUBLIC ENEMY REMIX (feat. ZICO, changmo)</li>
+            </ol>
+            <audio src="./songs/k-flip.mp3" preload="none" controls></audio>
+        </div>
+    </article>
+
+    <article class="album-card">
+        <img src="https://i.namu.wiki/i/9N2OQGCEVncfh1VRjxn7s3uDywP4ymrwmQpgsdJo_b8SUVgAK3uUgNEltVS14YM7SLWfWK-aake24WRdI3dfjQ.webp" class="char-tag" alt="다윈">
+        <div class="art-wrapper">
+            <a href="https://youtu.be/TiOpGgCXeT0?si=O-hRBf9kSszrC0Pq" target="_blank">
+                <img src="https://i.namu.wiki/i/PyTPdfpsqhR6Juon2q1XDnryEZAMsMp75hjvLiOAhPvbrgF2qinQ8zSbwCkOULnR2bdy9mEAcd7oPSsyQIkBtQ.webp" alt="sspop1">
+            </a>
+        </div>
+        <div class="album-info">
+            <h2>SSPOP1 <span class="artist-name">system_seoul</span></h2>
+            <div class="track-count">트랙 수 : 8</div>
+            <div class="rec-title">추천 트랙:</div>
+            <ol>
+                <li>긴밤</li>
+                <li>널</li>
+            </ol>
+            <audio src="./songs/sspop1.mp3" preload="none" controls></audio>
+        </div>
+    </article>
+
+    <article class="album-card">
+        <img src="https://i.namu.wiki/i/y1KFPwBVj-Q9LLe5CV1hhym0kwWwxcNbUXorPUD3fgFZ-AvJt8LrZ8pEk-oPrXyQBPZfSGi5jAgSf_-egT221A.webp" class="char-tag" alt="워터슨">
+        <div class="art-wrapper">
+            <a href="https://youtu.be/O-w8rCgnH6o?si=VGmdttfUCakCks_I" target="_blank">
+                <img src="https://i.namu.wiki/i/_Mvq7lJXibgbc1eFTKW6HegKeOr_rVCGu18qlpbqbmEcyy_eTheVMAiSq5CI02v8OnwTqe9CWRBpuRBibwta_Q.webp" alt="sspop2">
+            </a>
+        </div>
+        <div class="album-info">
+            <h2>SSPOP2 <span class="artist-name">system_seoul</span></h2>
+            <div class="track-count">트랙 수 : 10</div>
+            <div class="rec-title">추천 트랙:</div>
+            <ol>
+                <li>i miss ㅠ</li>
+                <li>4pril</li>
+            </ol>
+            <audio src="./songs/sspop2.mp3" preload="none" controls></audio>
+        </div>
+    </article>
+
+    <article class="album-card">
+        <img src="https://i.namu.wiki/i/4fVdcel2y3eD54bBusZ9VYw9rGWsvfEkmqUXWeWoy-7DD15vAaGQpty0RqJ3OcxT1eRkvzurbuiPjgc_8rdZfQ.webp" class="char-tag" alt="윌슨">
+        <div class="art-wrapper">
+            <a href="https://youtu.be/SsaSFgI04Dw?si=agwf8tbVE1ewbdat" target="_blank">
+                <img src="https://i.namu.wiki/i/jilspvjf6Hn7zDdTfgQf1j0w7IDQRfBNeC-JOmIRzYhyV30e86M6hcEQkkXpQXJBUTzuM9sdwzgALynirkBr2w.webp" alt="invasion">
+            </a>
+        </div>
+        <div class="album-info">
+            <h2>Invasion(Deluxe) <span class="artist-name">김상민그는감히전설이라고할수있다</span></h2>
+            <div class="track-count">트랙 수 : 18</div>
+            <div class="rec-title">추천 트랙:</div>
+            <ol>
+                <li>무한의 계단(feat. 염따)</li>
+                <li>HARARI FLOW(feat. GGM kimbo)</li>
+                <li>실리콘벨리(feat. Kid Milli)</li>
+                <li>황제펭귄(feat. 노창, 양홍원)</li>
+            </ol>
+            <audio src="./songs/invasion.mp3" preload="none" controls></audio>
+        </div>
+    </article>
+</main>
+
+<footer>© 2026 My Website</footer>
+
+<script>
+    // 모든 오디오 요소를 가져옴
+    const allAudios = document.querySelectorAll('audio');
+
+    allAudios.forEach(audio => {
+        // 재생 버튼을 눌렀을 때 실행되는 이벤트
+        audio.addEventListener('play', () => {
+            // 다른 모든 오디오를 일시정지 시킴 (중복 재생 방지)
+            allAudios.forEach(otherAudio => {
+                if (otherAudio !== audio) {
+                    otherAudio.pause();
+                    otherAudio.currentTime = 0; // 처음부터 다시 재생되게 하려면 추가, 아니면 주석 처리
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
